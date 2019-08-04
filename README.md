@@ -1,8 +1,8 @@
 
 Simple code to talk to the OpenVPN management ports of multiple OpenVPN
-processes. This code will open sockets, send "kill" command and agreggate 
+processes. <b>This code will open sockets, send "kill" command and agreggate 
 the number of disconnected clients.
-<b><b> 
+<b>
 A telnet session to a single OpenVPN process looks like this:
 ```
 [fkooman@vpn ~]$ telnet localhost 11940
@@ -20,7 +20,8 @@ quit
 Connection closed by foreign host.
 [fkooman@vpn ~]$
 ``` 
-<b><b>
+<b>
+
 The point here is to be able to (concurrently) connect to many OpenVPN 
 processes. The example below has only two. Extra functionality later will
 be also the use of the "status" command to see which clients are connected
