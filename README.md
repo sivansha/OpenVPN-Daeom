@@ -1,9 +1,10 @@
 
-Simple code to talk to the OpenVPN management ports of multiple OpenVPN
-processes. <b>This code will open sockets, send "kill" command and agreggate 
-the number of disconnected clients.
-<b>
-A telnet session to a single OpenVPN process looks like this:
+Simple code to talk to the OpenVPN management ports of multiple OpenVPN<br>
+processes. This code will open sockets, send "kill" command and agreggate<br>
+the number of disconnected clients.<br>
+ <br>
+A telnet session to a single OpenVPN process looks like this:<br>
+<br>
 ```
 [fkooman@vpn ~]$ telnet localhost 11940
 Trying ::1...
@@ -18,14 +19,13 @@ kill foo
 ERROR: common name 'foo' not found
 quit
 Connection closed by foreign host.
-[fkooman@vpn ~]$
-``` 
-<b>
-
-The point here is to be able to (concurrently) connect to many OpenVPN 
-processes. The example below has only two. Extra functionality later will
-be also the use of the "status" command to see which clients are connected
-and aggregate that as well.
-
-Eventually this will need to become a daemon that supports TLS and abstracts
-the multiple OpenVPN processes away from the daemon caller...
+[fkooman@vpn ~]$ 
+```
+The point here is to be able to (concurrently) connect to many OpenVPN<br> 
+processes. The example below has only two. Extra functionality later will<br>
+be also the use of the "status" command to see which clients are connected<br>
+and aggregate that as well.<br>
+<br>
+Eventually this will need to become a daemon that supports TLS and abstracts<br>
+the multiple OpenVPN processes away from the daemon caller...<br>
+<br>
