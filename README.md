@@ -4,7 +4,7 @@ processes. This code will open sockets, send "kill" command and agreggate
 the number of disconnected clients.
 <b><b> 
 A telnet session to a single OpenVPN process looks like this:
-
+```
 [fkooman@vpn ~]$ telnet localhost 11940
 Trying ::1...
 telnet: connect to address ::1: Connection refused
@@ -18,7 +18,8 @@ kill foo
 ERROR: common name 'foo' not found
 quit
 Connection closed by foreign host.
-[fkooman@vpn ~]$ 
+[fkooman@vpn ~]$
+``` 
 <b><b>
 The point here is to be able to (concurrently) connect to many OpenVPN 
 processes. The example below has only two. Extra functionality later will
