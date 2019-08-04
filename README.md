@@ -1,4 +1,3 @@
-
 # VPN Daemon
 
 We want to create a simple daemon that can be queried by the Let's Connect!
@@ -98,3 +97,74 @@ commands then, i.e. `setup` and `teardown`.
 6. Implement `status`
 7. Implement a way to periodically kill all client connections where the 
    certificate expired, is this even possible without referring to the CA?
+8. Allow the portal to talk to the daemon(s) and indicate which clients are
+   allowed to connect until what time (@ cert creation either through client
+   API or manually through the portal)
+   - then there is no need for the node to talk to the portal @connect
+9. How to sync the list of clients between portal/nodes when a new node is 
+   introduced, or they lose "sync"? 
+
+## Daemon API
+
+### Status
+
+This command will tell the portal when it received its last update from the 
+portal. The portal can then "replay" the `ADD` / `REMOVE` commands necessary to 
+get the daemon in the correct state again.
+
+    STATUS
+
+Example:
+
+    STATUS
+
+Response:
+
+    2019-08-04T10:27:44+00:00
+
+### Add
+
+`ADD` will allow this CN to connect, until the provided `EXPIRY`. Once `EXPIRY`
+is reached, the `REMOVE` command will be run automatically.
+
+    ADD <CN> <EXPIRY>
+
+Example:
+
+    ADD 07d1ccc455a21c2d5ac6068d4af727ca 2019-08-04T10:27:44+00:00
+
+Response:
+
+    OK
+
+### Remove 
+
+`REMOVE` will no longer allow the mentioned CN to connect, and also disconnect 
+any clients connected with this CN. This is intended for (admin) initiated 
+client removals, e.g. in case of abuse.
+
+    REMOVE <CN>
+
+Example:
+
+    REMOVE 07d1ccc455a21c2d5ac6068d4af727ca
+    
+Response:
+
+    OK
+
+### List
+
+This will list all currently connected clients.
+
+    LIST
+
+    <CN> <EXPIRY> <IPv4> <IPv6>
+
+Example:
+
+    LIST
+
+Response:
+
+    07d1ccc455a21c2d5ac6068d4af727ca 2019-08-04T10:27:44+00:00 10.42.42.2 fd00:4242:4242:4242::1000
